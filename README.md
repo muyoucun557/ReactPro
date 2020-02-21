@@ -69,3 +69,38 @@ const doubles = arr.map(doubleFn);
 [点击参看实例代码](./src)
 
 ### 使用JavaScript的工具链
+
+#### 推荐的工具链
+
+- 如果你是在学习**React**或创建一个新的单页应用，请使用Create React App。
+- 如果你是在用**Node.js**构建服务端渲染的网站，试试 [Next.js](https://nextjs.org/learn/basics/getting-started)。
+- 如果你是在构建面向内容的静态网站，试试 Gatsby。
+
+#### Create React App
+
+Node >= 8.10 和 npm >= 5.6
+
+``` shell
+npx create-react-app my-app
+cd my-app
+npm start
+```
+
+#### What is npx
+
+npx是npm5.2+附带的package运行工具。
+会帮你执行以依赖包里的二进制文件。举个例子
+
+``` shell
+npm i webpack -D      //非全局安装
+
+//如果要执行 webpack 的命令
+
+./node_modules/.bin/webpack -v
+```
+有了npx之后
+``` shell
+npm i webpack -D    //非全局安装
+
+npx webpack -v 
+```
