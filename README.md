@@ -66,6 +66,6 @@ const doubles = arr.map(doubleFn);
 
 ### 通过HTML的script标签引入React
 
-[点击参看实例代码](./src/react.html)
+[点击参看实例代码](./src)
 
 ### 使用JavaScript的工具链
