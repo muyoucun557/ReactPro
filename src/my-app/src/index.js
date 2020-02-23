@@ -53,3 +53,21 @@ ReactDOM.render(
 
 // 调用了2次render方法
 // 在浏览器上看到的效果是root的子元素是<h1>world!</h1>，和文档描述的不一致
+
+
+
+
+/******************************************************************************** */
+// 组件不能修改自身的props
+
+/*
+function Welcome(props) {
+    // 无论使用下面的哪种方式修改props；均会使页面报错
+    // props.name = 'Alice';
+    // props = {name: 'Alice'};
+    return <h1>{props.name}</h1>;
+}
+
+ReactDOM.render(<Welcome name="Sara"/>, document.getElementById('root'));
+*/
+
