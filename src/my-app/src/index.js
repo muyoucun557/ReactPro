@@ -71,3 +71,35 @@ function Welcome(props) {
 ReactDOM.render(<Welcome name="Sara"/>, document.getElementById('root'));
 */
 
+
+/******************************************************************************** */
+// 利用state来实现组件组我更新
+
+class Clock extends React.Component {
+    constructor(props) {
+        super(props);
+        this.state = {date: new Date()};
+    }
+    
+    render() {
+        return <h2>It is {this.state.date.toString()}</h2>
+    }
+
+    // 组件第一次渲染到DOM的时候会执行componentDidMount函数
+    // 组件第一次被渲染称为挂载
+    componentDidMount() {
+        console.log(`mount: ${new Date().toString()}`)
+        const self = this;
+        this.timerID = setInterval(function() {
+            self.setState({date: new Date()})
+        }, 1000)
+    }
+    
+    // 组件被清除的时候会执行componentWillUnmount函数
+    // 组件被清除被称为卸载
+    componentWillUnmount() {
+        console.log(`unmount: ${new Date().toString()}`)
+        clearInterval(this.timerID);
+    }
+}
+ReactDOM.render(<Clock />, document.getElementById('root'));
