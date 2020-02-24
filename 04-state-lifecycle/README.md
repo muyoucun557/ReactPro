@@ -92,6 +92,12 @@ ReactDOM.render(<Clock />, document.getElementById('root'));
 
 - State的更新可能是异步的。
 
-- State的更新会被合并
+- State的更新会被合并到当前的state
 
-setState会把提供的对象合并到当前的state中。
+处于性能考虑，React可能会把多个setState()调用合并成一个调用。this.props和this.state可能会异步更新，所以不能依赖他们的值来更新下一个状态。
+例如，下面的代码可能会无法更新计数器
+``` JSX
+this.setState({
+    counter: this.state.counter + this.props.increament
+});
+```
