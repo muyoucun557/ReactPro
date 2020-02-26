@@ -75,6 +75,7 @@ ReactDOM.render(<Welcome name="Sara"/>, document.getElementById('root'));
 /******************************************************************************** */
 // 利用state来实现组件组我更新
 
+/*
 class Clock extends React.Component {
     constructor(props) {
         super(props);
@@ -103,3 +104,68 @@ class Clock extends React.Component {
     }
 }
 ReactDOM.render(<Clock />, document.getElementById('root'));
+*/
+
+
+
+/******************************************************************************** */
+// 倒计时60s
+
+/*
+class Countdown extends React.Component {
+    constructor(props) {
+        super(props);
+        this.state = {seconds: 60};
+    }
+    
+    render() {
+        if (this.state.seconds > 0 ) {
+            return <div>倒计时{this.state.seconds}s</div>;
+        }
+        return <div>倒计时结束</div>;
+        
+    }
+
+    componentDidMount() {
+        const self = this;
+
+        self.timerId = setInterval(function(){
+
+            self.setState((state, props) => {
+                return {
+                    seconds: --state.seconds
+                };
+            });
+            if (self.state.second === 0) {
+                clearInterval(self.timerId);   
+            }
+        }, 1000);
+    }
+}
+
+ReactDOM.render(<Countdown />, document.getElementById('root'));
+*/
+
+
+/******************************************************************************** */
+// 事件处理
+
+// 在页面显示一个按钮，按钮的初始状态是ON(显示ON)，通过点击切换按钮状态。
+class Toggle extends React.Component {
+    constructor(props) {
+        super(props);
+        this.state = {status: true}
+        // 必须要绑定this；当然也可以通过其他方法绑定this
+        this.handleClick = this.handleClick.bind(this);
+    }
+
+    render() {
+        return <button onClick={(e) => this.handleClick.call(this,e)}>{this.state.status ? 'ON' : 'OFF'}</button>
+    }
+
+    handleClick(e) {
+        this.setState((state) => ({status: !state.status}))
+    }
+}
+
+ReactDOM.render(<Toggle />, document.getElementById('root'));
