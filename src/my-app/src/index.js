@@ -151,6 +151,7 @@ ReactDOM.render(<Countdown />, document.getElementById('root'));
 // 事件处理
 
 // 在页面显示一个按钮，按钮的初始状态是ON(显示ON)，通过点击切换按钮状态。
+/*
 class Toggle extends React.Component {
     constructor(props) {
         super(props);
@@ -169,3 +170,51 @@ class Toggle extends React.Component {
 }
 
 ReactDOM.render(<Toggle />, document.getElementById('root'));
+*/
+
+
+/******************************************************************************** */
+// Context
+
+// 为当前的theme创建一个context("light"是默认值)
+const ThemeContext = React.createContext('light');
+
+class App extends React.Component {
+    render() {
+        // 使用Provider来将当前的theme传递给以下的组件树
+        // 无论多深，任何组件都能读取这个值
+        // 在这个例子中，我们将“dark”作为当前的值传递下去
+        return <ThemeContext.Provider value="dark">
+            <Toolbar />
+        </ThemeContext.Provider>
+    }
+}
+
+class Toolbar extends React.Component {
+    static contextType = ThemeContext;
+    render() {
+        // 组件中不需要再指明往下传递theme了
+        return(<div>
+            <ThemedButton></ThemedButton>
+        </div>)
+    }
+}
+
+class ThemedButton extends React.Component {
+    // 指定contextType读取当前的theme context
+    // React会往上找到最近的theme provider，然后使用它的值
+    static contextType = ThemeContext;
+    render() {
+        return <Button theme={this.context}/>
+    }
+}
+
+class Button extends React.Component {
+    render() {
+        return (
+            <div>{this.props.theme}</div>
+        );
+    }
+}
+
+ReactDOM.render(<App></App>, document.getElementById('root'));
